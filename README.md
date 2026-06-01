@@ -153,11 +153,11 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 | `POST` | `/auth/login` | No | `{ email, password }` | Login; returns `accessToken`, `refreshToken`, `user` |
 | `POST` | `/auth/refresh-token` | No | `{ refreshToken }` | Issue a new access token |
 | `POST` | `/auth/logout` | No | `{ refreshToken }` | Invalidate refresh token server-side |
-| `GET` | `/auth/me` | | - | Return current authenticated user |
+| `GET` | `/auth/me` | Yes | - | Return current authenticated user |
 
 ### Task Routes (User-scoped)
 
-| Method | Endpoint | Auth | Body | Description |
+| Method | Endpoint | Body | Description |
 |---|---|---|---|---|
 | `POST` | `/tasks` | `{ title, description?, status?, priority?, due_date? }` | Create a task |
 | `GET` | `/tasks` | List all tasks for the authenticated user |
@@ -167,7 +167,7 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 
 ### Admin Routes (Admin role only)
 
-| Method | Endpoint | Auth | Role | Description |
+| Method | Endpoint | Role | Description |
 |---|---|---|---|---|
 | `GET` | `/admin/users` | admin | List all registered users |
 | `GET` | `/admin/tasks` | admin | List all tasks system-wide |
