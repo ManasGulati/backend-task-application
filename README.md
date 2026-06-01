@@ -145,6 +145,7 @@ Base URL: `http://localhost:5000/api/v1`
 
 All protected routes require: `Authorization: Bearer <accessToken>`
 
+
 ### Auth Routes
 
 | Method | Endpoint | Auth | Body | Description |
@@ -154,6 +155,8 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 | `POST` | `/auth/refresh-token` | No | `{ refreshToken }` | Issue a new access token |
 | `POST` | `/auth/logout` | No | `{ refreshToken }` | Invalidate refresh token server-side |
 | `GET` | `/auth/me` | Yes | - | Return current authenticated user |
+
+---
 
 ### Task Routes (User-scoped)
 
@@ -165,6 +168,8 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 | `PUT` | `/tasks/:id`| `{ title?, description?, status?, priority?, due_date? }` | Update a task (owner only) |
 | `DELETE` | `/tasks/:id`| Delete a task (owner only) |
 
+---
+
 ### Admin Routes (Admin role only)
 
 | Method | Endpoint | Role | Description |
@@ -175,6 +180,8 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 | `GET` | `/admin/tasks/:id` | admin | Get any task by ID |
 | `PUT` | `/admin/tasks/:id` | admin | Update any task (user reassignment rejected) |
 | `DELETE` | `/admin/tasks/:id` | admin | Delete any task |
+
+---
 
 **Standard response envelope:**
 ```json
