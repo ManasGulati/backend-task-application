@@ -143,43 +143,46 @@ On server startup, `seedAdmin.js` checks for an existing admin user and creates 
 
 Base URL: `http://localhost:5000/api/v1`
 
-All protected routes require: `Authorization: Bearer <accessToken>`
+All protected routes require:
 
+```http
+Authorization: Bearer <accessToken>
+```
 
 ### Auth Routes
 
 | Method | Endpoint | Auth | Body | Description |
 |---|---|---|---|---|
 | `POST` | `/auth/register` | No | `{ name, email, password }` | Register a new user |
-| `POST` | `/auth/login` | No | `{ email, password }` | Login; returns `accessToken`, `refreshToken`, `user` |
+| `POST` | `/auth/login` | No | `{ email, password }` | Log in and return `accessToken`, `refreshToken`, and `user` |
 | `POST` | `/auth/refresh-token` | No | `{ refreshToken }` | Issue a new access token |
-| `POST` | `/auth/logout` | No | `{ refreshToken }` | Invalidate refresh token server-side |
-| `GET` | `/auth/me` | Yes | - | Return current authenticated user |
+| `POST` | `/auth/logout` | No | `{ refreshToken }` | Invalidate the refresh token server-side |
+| `GET` | `/auth/me` | Yes | - | Return the current authenticated user |
 
 ---
 
-### Task Routes (User-scoped)
+### Task Routes (User-Scoped)
 
-| Method | Endpoint | Body | Description |
+| Method | Endpoint | Auth | Body | Description |
 |---|---|---|---|---|
-| `POST` | `/tasks` | `{ title, description?, status?, priority?, due_date? }` | Create a task |
-| `GET` | `/tasks` | List all tasks for the authenticated user |
-| `GET` | `/tasks/:id`| Get a single task by ID (owner only) |
-| `PUT` | `/tasks/:id`| `{ title?, description?, status?, priority?, due_date? }` | Update a task (owner only) |
-| `DELETE` | `/tasks/:id`| Delete a task (owner only) |
+| `POST` | `/tasks` | Yes | `{ title, description?, status?, priority?, due_date? }` | Create a task |
+| `GET` | `/tasks` | Yes | - | List all tasks for the authenticated user |
+| `GET` | `/tasks/:id` | Yes | - | Get a single task by ID (owner only) |
+| `PUT` | `/tasks/:id` | Yes | `{ title?, description?, status?, priority?, due_date? }` | Update a task (owner only) |
+| `DELETE` | `/tasks/:id` | Yes | - | Delete a task (owner only) |
 
 ---
 
-### Admin Routes (Admin role only)
+### Admin Routes (Admin Role Only)
 
-| Method | Endpoint | Role | Description |
+| Method | Endpoint | Role | Body | Description |
 |---|---|---|---|---|
-| `GET` | `/admin/users` | admin | List all registered users |
-| `GET` | `/admin/tasks` | admin | List all tasks system-wide |
-| `POST` | `/admin/tasks` | admin | `{ user, title, ... }` : Create a task for any user |
-| `GET` | `/admin/tasks/:id` | admin | Get any task by ID |
-| `PUT` | `/admin/tasks/:id` | admin | Update any task (user reassignment rejected) |
-| `DELETE` | `/admin/tasks/:id` | admin | Delete any task |
+| `GET` | `/admin/users` | admin | - | List all registered users |
+| `GET` | `/admin/tasks` | admin | - | List all tasks system-wide |
+| `POST` | `/admin/tasks` | admin | `{ user, title, ... }` | Create a task for any user |
+| `GET` | `/admin/tasks/:id` | admin | - | Get any task by ID |
+| `PUT` | `/admin/tasks/:id` | admin | `{ title?, description?, status?, priority?, due_date? }` | Update any task; user reassignment is rejected |
+| `DELETE` | `/admin/tasks/:id` | admin | - | Delete any task |
 
 ---
 
