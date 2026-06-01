@@ -153,7 +153,7 @@ All protected routes require: `Authorization: Bearer <accessToken>`
 | `POST` | `/auth/login` | No | `{ email, password }` | Login; returns `accessToken`, `refreshToken`, `user` |
 | `POST` | `/auth/refresh-token` | No | `{ refreshToken }` | Issue a new access token |
 | `POST` | `/auth/logout` | No | `{ refreshToken }` | Invalidate refresh token server-side |
-| `GET` | `/auth/me` | ✅ | — | Return current authenticated user |
+| `GET` | `/auth/me` | | - | Return current authenticated user |
 
 ### Task Routes (User-scoped)
 
